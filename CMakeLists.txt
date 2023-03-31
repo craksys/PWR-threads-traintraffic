@@ -1,0 +1,10 @@
+set(CURSES_LIBRARY "/usr/lib/x86_64-linux-gnu/libncurses.so")
+set(CURSES_INCLUDE_PATH "/usr/include")
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIR})
+cmake_minimum_required(VERSION 3.25)
+project(untitled)
+
+set(CMAKE_CXX_STANDARD 14)
+add_executable(untitled gui.cpp gui_map.cpp)
+target_link_libraries(untitled ${CURSES_LIBRARIES})
