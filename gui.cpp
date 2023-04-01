@@ -1,7 +1,9 @@
 #include "gui_map.hpp"
+#include "rails.h"
 #include <ncurses.h>
 #include <vector>
 #include <string>
+#include <iostream>
 
 
 class GUI {

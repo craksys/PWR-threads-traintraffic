@@ -6,5 +6,5 @@ cmake_minimum_required(VERSION 3.25)
 project(untitled)
 
 set(CMAKE_CXX_STANDARD 14)
-add_executable(untitled gui.cpp gui_map.cpp)
+add_executable(untitled gui.cpp gui_map.cpp rails.cpp train.cpp)
 target_link_libraries(untitled ${CURSES_LIBRARIES})
