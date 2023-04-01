@@ -1,9 +1,12 @@
 #include "gui_map.hpp"
 #include "rails.h"
+#include "train.h"
 #include <ncurses.h>
 #include <vector>
 #include <string>
 #include <iostream>
+#include <chrono>
+#include <thread>
 
 
 class GUI {
@@ -102,9 +105,26 @@ public:
 
     }
 };
+/* INSTRUKCJA TWORZENIA POCIAGU
+    Rails rails;
+    Train train;
+    railStruct* arr = rails.createRailStructArray(11);
+    rails.createStraightSection(arr,0,10);
+    std::thread myThread([&train, arr]() {
+        train.createOutsideTrain(arr, 0, 250);
+});*/
+/*SYF DO WYŚWIETLANIA TORÓW
+ while(true){
+        for(int i = 0; i < 11; i++){
+            std::cout << "tor: " << i << " " << arr[i].is_mtx_locked << std::endl;
+        }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "-------------------------------------------" << std::endl;
+    }*/
 
 int main()
 {
+
     GUI gui;
     gui.addElement(0,0,"Mapa");
     gui.addElement(120,20,"Wroclaw");
@@ -119,7 +139,6 @@ int main()
     gui.addElement(70,5,"Glogow");
 
     gui.show();
-
     return 0;
 }
 
