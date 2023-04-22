@@ -1,39 +1,27 @@
 #ifndef GUI_MAP_HEADER
 #define GUI_MAP_HEADER
 
+#include "../map.hpp"
 #include <ncurses.h>
 #include <vector>
 #include <string>
-#include <array>
-
-struct Track {
-    int x;
-    int y;
-    char typeOfTrack;
-
-    Track(int x, int y, char track) : x(x), y(y), typeOfTrack(track) {}
-};
+#include <map>
 
 
 class GUImap {
 private:
+    std::vector<City> cities;
+    std::map<int, occupied_track> trains;
     std::vector<std::vector<std::vector<Track>>> routes;
-    std::vector<int> x_coords;
-    std::vector<int> y_coords;
-    std::vector<std::string> names;
-    int xffset = 0;
-    int yOffset = 2;
+    int xOffset = -2;
+    int yOffset = 1;
 
 public:
-    std::vector<Track> line(int Ax, int Ay, int Bx, int By, int trackInLine, bool up);
-    std::vector<std::vector<std::vector<Track>>> getRoutes();
-    void matrix();
-    void addLocation(int x, int y, const std::string& name);
-    void drawMap(WINDOW *win);
-    void connect(int cityB, int cityA, int trackInLine, bool up);
-    void revers(int cityA, int cityB, bool up);
+    void setUpGUImap(const std::vector<City>& cities_ref, const std::map<int, occupied_track>& trains_ref, 
+          const std::vector<std::vector<std::vector<Track>>>& routes_ref) ;
+    void drawCities(WINDOW *win);
     void drawConnections(WINDOW *win);
-    
+    void drawTrains(WINDOW *win);
 };
 
 #endif

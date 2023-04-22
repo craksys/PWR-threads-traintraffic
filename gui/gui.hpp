@@ -16,11 +16,9 @@ private:
     int option = 0;
 
 public:
-    void addElement(int x, int y, const std::string &element);
+    void setUpGUI(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r);
     int getCounter() const;
-    bool drawTrainOnMap(int a, int b, int possition);
     void printOptions() const;
-    void GUIParams();
     void show();
 };
 

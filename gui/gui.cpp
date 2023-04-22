@@ -4,24 +4,18 @@
 #include <vector>
 #include <string>
 
-void GUI::addElement(int x, int y, const std::string& element) {
-    optionsVector.push_back(element);
-    gui_map.addLocation(x,y,element);
+void GUI::setUpGUI(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r){
+    optionsVector.push_back("Mapa");
     counter++;
+    for (auto& city : c) {
+        optionsVector.push_back(city.name);
+        counter++;
+    }
+    gui_map.setUpGUImap(c,t,r);
 }
 
 int GUI::getCounter() const {
     return counter;
-}
-
-bool GUI::drawTrainOnMap(int a, int b, int possition)
-{
-    if(possition>gui_map.getRoutes()[a][b].size()>=0){
-        Track tr = gui_map.getRoutes()[a][b][possition];
-        mvwprintw(info_win, tr.y, tr.x, "%c", tr.typeOfTrack);
-    }
-    
-    return false;
 }
 
 void GUI::printOptions() const {
@@ -79,11 +73,9 @@ void GUI::show(){
                 wclear(info_win);
                 if(option == 0){
                     gui_map.drawConnections(info_win);
-                    gui_map.drawMap(info_win);
-                    //THEN DRAW TRAINS
-                    //TODO connect it with threads
+                    gui_map.drawCities(info_win);
                     wattron(info_win, COLOR_PAIR(3));
-                    drawTrainOnMap(5,1,6);
+                    gui_map.drawTrains(info_win);
                     wattroff(info_win, COLOR_PAIR(3));
                 }else{
                     mvwprintw(info_win, 2, 20, optionsVector[option].c_str());
@@ -104,28 +96,3 @@ void GUI::show(){
 
 }
 
-void GUI::GUIParams(){
-addElement(0,0,"Mapa");
-addElement(120,20,"Wroclaw");   //1
-addElement(115,5,"Rawicz");     //2
-addElement(125,7,"Trzebnica");  //3
-addElement(20,7,"Zagan");       //4
-addElement(70,20,"Legnica");    //5
-addElement(70,36,"Walbrzych");  //6
-addElement(125,40,"Klodzko");   //7
-addElement(150,15,"Olesnica");  //8
-addElement(10,30,"Zgorzelec");  //9
-addElement(70,5,"Glogow");      //10
-gui_map.matrix();
-gui_map.connect(5,1, 1, false);
-gui_map.connect(10,1, 15, false);
-gui_map.connect(6,1, 10, false);
-gui_map.connect(1,2, 7, true);
-gui_map.connect(1,3, 1, true);
-gui_map.connect(1,8,5,false);
-gui_map.connect(4,10,40,false);
-gui_map.connect(4,5,4,false);
-gui_map.connect(9,5,27,false);
-gui_map.connect(9,6,35,false);
-gui_map.connect(7,1,4,true);
-}
