@@ -22,6 +22,8 @@ public:
     void drawCities(WINDOW *win);
     void drawConnections(WINDOW *win);
     void drawTrains(WINDOW *win);
+
+    void drawRailsName(WINDOW *win);
 };
 
 #endif

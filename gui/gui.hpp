@@ -11,6 +11,7 @@ private:
     WINDOW *menu_win;
     WINDOW *info_win;
     GUImap gui_map;
+    GUImap wroclaw_map;
     std::vector<std::string> optionsVector;
     int counter = 0;
     int option = 0;
@@ -20,6 +21,9 @@ public:
     int getCounter() const;
     void printOptions() const;
     void show();
+
+    void setUpGUIWroclaw(const std::vector<City> &c, const std::map<int, occupied_track> &t,
+                         const std::vector<std::vector<std::vector<Track>>> &r);
 };
 
 #endif

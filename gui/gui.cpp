@@ -14,6 +14,16 @@ void GUI::setUpGUI(const std::vector<City>& c, const std::map<int, occupied_trac
     gui_map.setUpGUImap(c,t,r);
 }
 
+void GUI::setUpGUIWroclaw(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r){
+    optionsVector.push_back("Mapa");
+    counter++;
+    for (auto& city : c) {
+        optionsVector.push_back(city.name);
+        counter++;
+    }
+    wroclaw_map.setUpGUImap(c,t,r);
+}
+
 int GUI::getCounter() const {
     return counter;
 }
@@ -77,7 +87,14 @@ void GUI::show(){
                     wattron(info_win, COLOR_PAIR(3));
                     gui_map.drawTrains(info_win);
                     wattroff(info_win, COLOR_PAIR(3));
-                }else{
+                }if(option == 1){
+                    wroclaw_map.drawConnections(info_win);
+                    wroclaw_map.drawRailsName(info_win);
+                    wattron(info_win, COLOR_PAIR(3));
+                    wroclaw_map.drawTrains(info_win);
+                    wattroff(info_win, COLOR_PAIR(3));
+                }
+                else{
                     mvwprintw(info_win, 2, 20, optionsVector[option].c_str());
                 }
                 wrefresh(info_win);

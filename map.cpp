@@ -58,6 +58,10 @@ void World_map::connect(int cityA, int cityB, int trackInLine){
     revers(cityA,cityB);
 }
 
+void World_map::connect_without_revers(int cityA, int cityB, int trackInLine){
+    routes[cityA][cityB] = line(cityA, cityB, trackInLine);
+}
+
 std::vector<Track> World_map::line(int cityA, int cityB, int trackInLine){
     std::vector<Track> points;
     char diagonaChar;
