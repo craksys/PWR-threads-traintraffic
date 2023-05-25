@@ -2,63 +2,15 @@
 #include "map.hpp"
 #include <iostream>
 
+World_map getMapOlesnica();
+
+World_map getMap();
+
 int main()
 {
-    World_map wroclaw;
-    wroclaw.addLocation(-1,18,""); //min -1 // tor wyjsciowy gorny
-    wroclaw.addLocation(20,18,"Tor 1"); //max 210
+    World_map olesnica = getMapOlesnica();
+    World_map wroclaw = getMap();
 
-    wroclaw.addLocation(-1, 26, ""); //tor wyjsciowy dolny
-    wroclaw.addLocation(20, 26, "Tor 2");
-
-    wroclaw.addLocation(18,18,"");
-    wroclaw.addLocation(40,16, "Tor 3");//od toru 1 w górę
-
-    wroclaw.addLocation(22, 18,"");
-    wroclaw.addLocation(40, 18,"Tor 4");
-
-    wroclaw.addLocation(18,26,"");
-    wroclaw.addLocation(40,28,"Tor 5");
-
-    wroclaw.addLocation(22,26,"");
-    wroclaw.addLocation(40,26,"Tor 6");
-
-    wroclaw.addLocation(38,26,"");
-    wroclaw.addLocation(100,24,"Tor 7");
-
-    wroclaw.addLocation(42,26,"");
-    wroclaw.addLocation(56,26,"Tor 8");
-
-    wroclaw.addLocation(38,28,"");
-    wroclaw.addLocation(80,34,"Tor 9");
-
-    wroclaw.addLocation(54,26,"");
-    wroclaw.addLocation(100,30,"Tor 10");
-
-    wroclaw.addLocation(58,26,"");
-    wroclaw.addLocation(100,26,"Tor 11");
-
-    wroclaw.addLocation(78,34,"");
-    wroclaw.addLocation(100,38,"Tor 12");
-
-    wroclaw.addLocation(82,34,"");
-    wroclaw.addLocation(100,34,"Tor 13");
-
-    wroclaw.matrixes();
-    wroclaw.connect_without_revers(0,1,3);
-    wroclaw.connect_without_revers(2,3,3);
-    wroclaw.connect_without_revers(4,5,3);
-    wroclaw.connect_without_revers(6,7,3);
-    wroclaw.connect_without_revers(8,9,3);
-    wroclaw.connect_without_revers(10,11,3);
-    wroclaw.connect_without_revers(12,13,3);
-    wroclaw.connect_without_revers(14,15,3);
-    wroclaw.connect_without_revers(16,17,3);
-    wroclaw.connect_without_revers(18,19,3);
-    wroclaw.connect_without_revers(20,21,3);
-    wroclaw.connect_without_revers(22,23,3);
-    wroclaw.connect_without_revers(24,25,3);
-    wroclaw.create_rails();
 
     World_map map;
     map.addLocation(120,20,"Wroclaw");   //0
@@ -88,10 +40,201 @@ int main()
     GUI gui;
     gui.setUpGUI(map.getCities(), map.getTrainsOnMap(), map.getRoutes());
 
-    gui.setUpGUIWroclaw(wroclaw.getCities(),wroclaw.getTrainsOnMap(), wroclaw.getRoutes());
-
+    gui.setUpGUIOlesnica(olesnica.getCities(), olesnica.getTrainsOnMap(), olesnica.getRoutes());
+    gui.setUpGUIZgorzelec(wroclaw.getCities(), wroclaw.getTrainsOnMap(), wroclaw.getRoutes());
 
     gui.show();
 
     return 0;
+}
+
+World_map getMap() {
+    World_map zgorzelec;
+    zgorzelec.addLocation(170, 14, "Tor 1");
+    zgorzelec.addLocation(211, 14, "");
+
+    zgorzelec.addLocation(170, 36, "Tor 2");
+    zgorzelec.addLocation(211, 36, "");
+
+    zgorzelec.addLocation(150, 10, "Tor 3");
+    zgorzelec.addLocation(172, 14, "");
+
+    zgorzelec.addLocation(130, 14, "Tor 4");
+    zgorzelec.addLocation(158, 14, "");
+
+    zgorzelec.addLocation(130, 10, "Tor 5");
+    zgorzelec.addLocation(152, 10, "");
+
+    zgorzelec.addLocation(120, 8, "Tor 6");
+    zgorzelec.addLocation(132, 10, "");
+
+    zgorzelec.addLocation(100, 8, "Tor 7");
+    zgorzelec.addLocation(122, 8, "");
+
+    zgorzelec.addLocation(100, 10, "Tor 8");
+    zgorzelec.addLocation(126, 10, "");
+
+    zgorzelec.addLocation(90, 6, "Tor 9");
+    zgorzelec.addLocation(102, 8, "");
+
+    zgorzelec.addLocation(70, 6, "Tor 10");
+    zgorzelec.addLocation(92, 6, "");
+
+    zgorzelec.addLocation(70, 8, "Tor 11");
+    zgorzelec.addLocation(96, 8, "");
+
+    zgorzelec.addLocation(60, 4, "Tor 12");
+    zgorzelec.addLocation(72, 6, "");
+
+    zgorzelec.addLocation(40, 4, "Tor 13");
+    zgorzelec.addLocation(62, 4, "");
+
+    zgorzelec.addLocation(40, 6, "Tor 14");
+    zgorzelec.addLocation(66, 6, "");
+
+    zgorzelec.addLocation(40, 8, "Tor 15");
+    zgorzelec.addLocation(72, 8, "");
+
+    zgorzelec.addLocation(40, 10, "Tor 16");
+    zgorzelec.addLocation(102, 10, "");
+
+    zgorzelec.addLocation(40, 14, "Tor 17");
+    zgorzelec.addLocation(156, 14, "");
+
+    zgorzelec.addLocation(160, 34, "Tor 18");
+    zgorzelec.addLocation(172, 36, "");
+
+    zgorzelec.addLocation(140, 34, "Tor 19");
+    zgorzelec.addLocation(162, 34, "");
+
+    zgorzelec.addLocation(40, 36, "Tor 20");
+    zgorzelec.addLocation(166, 36, "");
+
+    zgorzelec.addLocation(130, 32, "Tor 21");
+    zgorzelec.addLocation(142, 34, "");
+
+    zgorzelec.addLocation(110, 32, "Tor 22");
+    zgorzelec.addLocation(132, 32, "");
+
+    zgorzelec.addLocation(40, 34, "Tor 23");
+    zgorzelec.addLocation(136, 34, "");
+
+    zgorzelec.addLocation(100, 30, "Tor 24");
+    zgorzelec.addLocation(112, 32, "");
+
+    zgorzelec.addLocation(40, 30, "Tor 25");
+    zgorzelec.addLocation(102, 30, "");
+
+    zgorzelec.addLocation(40, 32, "Tor 26");
+    zgorzelec.addLocation(106, 32, "");
+
+    zgorzelec.matrixes();
+    zgorzelec.connect_without_revers(0, 1, 3);
+    zgorzelec.connect_without_revers(2, 3, 3);
+    zgorzelec.connect_without_revers(4, 5, 3);
+    zgorzelec.connect_without_revers(6, 7, 3);
+    zgorzelec.connect_without_revers(8, 9, 3);
+    zgorzelec.connect_without_revers(10, 11, 3);
+    zgorzelec.connect_without_revers(12, 13, 3);
+    zgorzelec.connect_without_revers(14, 15, 3);
+    zgorzelec.connect_without_revers(16, 17, 3);
+    zgorzelec.connect_without_revers(18, 19, 3);
+    zgorzelec.connect_without_revers(20, 21, 3);
+    zgorzelec.connect_without_revers(22, 23, 3);
+    zgorzelec.connect_without_revers(24, 25, 3);
+    zgorzelec.connect_without_revers(26, 27, 3);
+    zgorzelec.connect_without_revers(28, 29, 3);
+    zgorzelec.connect_without_revers(30, 31, 3);
+    zgorzelec.connect_without_revers(32, 33, 3);
+    zgorzelec.connect_without_revers(34, 35, 3);
+    zgorzelec.connect_without_revers(36, 37, 3);
+    zgorzelec.connect_without_revers(38, 39, 3);
+    zgorzelec.connect_without_revers(40, 41, 3);
+    zgorzelec.connect_without_revers(42, 43, 3);
+    zgorzelec.connect_without_revers(44, 45, 3);
+    zgorzelec.connect_without_revers(46, 47, 3);
+    zgorzelec.connect_without_revers(48, 49, 3);
+    zgorzelec.connect_without_revers(50, 51, 3);
+
+    zgorzelec.create_rails();
+    return zgorzelec;
+}
+
+World_map getMapOlesnica() {
+    World_map olesnica;
+    olesnica.addLocation(-1, 18, ""); //min -1 // tor wyjsciowy gorny
+    olesnica.addLocation(20, 18, "Tor 1"); //max 210
+
+    olesnica.addLocation(-1, 26, ""); //tor wyjsciowy dolny
+    olesnica.addLocation(20, 26, "Tor 2");
+
+    olesnica.addLocation(18, 18, "");
+    olesnica.addLocation(40, 16, "Tor 3");//od toru 1 w górę
+
+    olesnica.addLocation(22, 18, "");
+    olesnica.addLocation(40, 18, "Tor 4");
+
+    olesnica.addLocation(18, 26, "");
+    olesnica.addLocation(40, 28, "Tor 5");
+
+    olesnica.addLocation(22, 26, "");
+    olesnica.addLocation(40, 26, "Tor 6");
+
+    olesnica.addLocation(38, 26, "");
+    olesnica.addLocation(100, 24, "Tor 7");
+
+    olesnica.addLocation(42, 26, "");
+    olesnica.addLocation(56, 26, "Tor 8");
+
+    olesnica.addLocation(38, 28, "");
+    olesnica.addLocation(80, 34, "Tor 9");
+
+    olesnica.addLocation(54, 26, "");
+    olesnica.addLocation(100, 30, "Tor 10");
+
+    olesnica.addLocation(58, 26, "");
+    olesnica.addLocation(100, 26, "Tor 11");
+
+    olesnica.addLocation(78, 34, "");
+    olesnica.addLocation(100, 38, "Tor 12");
+
+    olesnica.addLocation(82, 34, "");
+    olesnica.addLocation(100, 34, "Tor 13");
+
+    olesnica.addLocation(38, 16, "");
+    olesnica.addLocation(60, 11, "Tor 14");
+
+    olesnica.addLocation(38, 18, "");
+    olesnica.addLocation(100, 20, "Tor 15");
+
+    olesnica.addLocation(42, 18, "");
+    olesnica.addLocation(100, 18, "Tor 16");
+
+    olesnica.addLocation(58, 11, "");
+    olesnica.addLocation(100, 6, "Tor 17");
+
+    olesnica.addLocation(62, 11, "");
+    olesnica.addLocation(100, 11, "Tor 18");
+
+    olesnica.matrixes();
+    olesnica.connect_without_revers(0, 1, 3);
+    olesnica.connect_without_revers(2, 3, 3);
+    olesnica.connect_without_revers(4, 5, 3);
+    olesnica.connect_without_revers(6, 7, 3);
+    olesnica.connect_without_revers(8, 9, 3);
+    olesnica.connect_without_revers(10, 11, 3);
+    olesnica.connect_without_revers(12, 13, 3);
+    olesnica.connect_without_revers(14, 15, 3);
+    olesnica.connect_without_revers(16, 17, 3);
+    olesnica.connect_without_revers(18, 19, 3);
+    olesnica.connect_without_revers(20, 21, 3);
+    olesnica.connect_without_revers(22, 23, 3);
+    olesnica.connect_without_revers(24, 25, 3);
+    olesnica.connect_without_revers(26, 27, 3);
+    olesnica.connect_without_revers(28, 29, 3);
+    olesnica.connect_without_revers(30, 31, 3);
+    olesnica.connect_without_revers(32, 33, 3);
+    olesnica.connect_without_revers(34, 35, 3);
+    olesnica.create_rails();
+    return olesnica;
 }

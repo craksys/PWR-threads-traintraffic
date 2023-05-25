@@ -24,6 +24,8 @@ public:
     void drawTrains(WINDOW *win);
 
     void drawRailsName(WINDOW *win);
+
+    void drawReverseRailsName(WINDOW *win);
 };
 
 #endif

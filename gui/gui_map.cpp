@@ -28,6 +28,12 @@ void GUImap::drawRailsName(WINDOW *win) {
     }
 }
 
+void GUImap::drawReverseRailsName(WINDOW *win) {
+    for (auto&& city : cities) {
+        mvwprintw(win, city.y, city.x + 2, city.name.c_str());
+    }
+}
+
 void GUImap::drawConnections(WINDOW *win) {
     for (int i = 0; i < cities.size(); i++) {
         for (int j = 0; j < cities.size(); j++) {
