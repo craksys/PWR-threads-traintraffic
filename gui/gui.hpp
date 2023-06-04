@@ -18,14 +18,14 @@ private:
     int option = 0;
 
 public:
-    void setUpGUI(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r);
+    void setUpGUI(const std::vector<City>& c, const std::vector<std::vector<std::vector<Track>>>& r);
     int getCounter() const;
     void printOptions() const;
-    void show();
+    void show(std::vector<Train>& trains, Control_map& contr);
+    void keyboard();
 
     void setUpGUIOlesnica(const std::vector<City> &c, const std::map<int, occupied_track> &t,
                           const std::vector<std::vector<std::vector<Track>>> &r);
-
     void setUpGUIZgorzelec(const std::vector<City> &c, const std::map<int, occupied_track> &t,
                            const std::vector<std::vector<std::vector<Track>>> &r);
 };

@@ -3,35 +3,17 @@
 #include <ncurses.h>
 #include <vector>
 #include <string>
+#include <thread>
+#include <iostream>
 
-void GUI::setUpGUI(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r){
+void GUI::setUpGUI(const std::vector<City>& c, const std::vector<std::vector<std::vector<Track>>>& r){
     optionsVector.push_back("Mapa");
     counter++;
     for (auto& city : c) {
         optionsVector.push_back(city.name);
         counter++;
     }
-    gui_map.setUpGUImap(c,t,r);
-}
-
-void GUI::setUpGUIOlesnica(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r){
-    optionsVector.push_back("Mapa");
-    counter++;
-    for (auto& city : c) {
-        optionsVector.push_back(city.name);
-        counter++;
-    }
-    olesnica_map.setUpGUImap(c, t, r);
-}
-
-void GUI::setUpGUIZgorzelec(const std::vector<City>& c, const std::map<int, occupied_track>& t, const std::vector<std::vector<std::vector<Track>>>& r){
-    optionsVector.push_back("Mapa");
-    counter++;
-    for (auto& city : c) {
-        optionsVector.push_back(city.name);
-        counter++;
-    }
-    zgorzelec_map.setUpGUImap(c, t, r);
+    gui_map.setUpGUImap(c, r);
 }
 
 int GUI::getCounter() const {
@@ -51,7 +33,32 @@ void GUI::printOptions() const {
     }
 }
 
-void GUI::show(){
+void GUI::keyboard(){
+    int ch;
+    while ((ch = getch()) != KEY_F(1))
+    {
+        switch(ch) {
+            case KEY_DOWN:
+                option--;
+                if (option < 0) {
+                    option = getCounter() - 1;
+                }
+                break;
+            case KEY_UP:
+                option++;
+                if (option >= getCounter()) {
+                    option = 0;
+                }
+                break;
+        }
+
+        
+    }
+    
+    
+}
+
+void GUI::show(std::vector<Train>& trains, Control_map& contr){
     initscr();
     cbreak();
     noecho();
@@ -74,30 +81,20 @@ void GUI::show(){
     wrefresh(menu_win);
     wrefresh(info_win);
 
-    int ch;
-    while((ch = getch()) != KEY_F(1)) {
-        switch(ch) {
-            case KEY_DOWN:
-                option--;
-                if (option < 0) {
-                    option = getCounter() - 1;
-                }
-                break;
-            case KEY_UP:
-                option++;
-                if (option >= getCounter()) {
-                    option = 0;
-                }
-                break;
-            case '\n':
-                wclear(info_win);
-                if(option == 0){
-                    gui_map.drawConnections(info_win);
-                    gui_map.drawCities(info_win);
-                    wattron(info_win, COLOR_PAIR(3));
-                    gui_map.drawTrains(info_win);
-                    wattroff(info_win, COLOR_PAIR(3));
-                }if(option == 8){
+    while(true) {
+        
+        std::this_thread::sleep_for(std::chrono::milliseconds(50));
+        wclear(info_win);
+        if(option == 0){
+            gui_map.drawConnections(info_win);
+            gui_map.drawCities(info_win);
+            // gui_map.drawStatiscick(info_win, contr);
+            gui_map.drawNiceStatiscic(info_win, contr);
+            wattron(info_win, COLOR_PAIR(3));
+            gui_map.drawTrains(info_win, trains);
+            wattroff(info_win, COLOR_PAIR(3));
+        }
+      if(option == 8){
                     olesnica_map.drawConnections(info_win);
                     olesnica_map.drawRailsName(info_win);
                     wattron(info_win, COLOR_PAIR(3));
@@ -110,12 +107,11 @@ void GUI::show(){
                 zgorzelec_map.drawTrains(info_win);
                 wattroff(info_win, COLOR_PAIR(3));
                 }
-                else{
-                    mvwprintw(info_win, 2, 20, optionsVector[option].c_str());
-                }
-                wrefresh(info_win);
-                break;
+      
+      else{
+            mvwprintw(info_win, 2, 20, optionsVector[option].c_str());
         }
+        wrefresh(info_win);
 
         printOptions();
 
@@ -128,4 +124,3 @@ void GUI::show(){
     endwin();
 
 }
-
