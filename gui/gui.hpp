@@ -24,9 +24,9 @@ public:
     void show(std::vector<Train>& trains, Control_map& contr);
     void keyboard();
 
-    void setUpGUIOlesnica(const std::vector<City> &c, const std::map<int, occupied_track> &t,
+    void setUpGUIOlesnica(const std::vector<City> &c, 
                           const std::vector<std::vector<std::vector<Track>>> &r);
-    void setUpGUIZgorzelec(const std::vector<City> &c, const std::map<int, occupied_track> &t,
+    void setUpGUIZgorzelec(const std::vector<City> &c, 
                            const std::vector<std::vector<std::vector<Track>>> &r);
 };
 

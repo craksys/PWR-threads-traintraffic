@@ -10,10 +10,22 @@ void GUI::setUpGUI(const std::vector<City>& c, const std::vector<std::vector<std
     optionsVector.push_back("Mapa");
     counter++;
     for (auto& city : c) {
-        optionsVector.push_back(city.name);
-        counter++;
+        if(city.name == "Zgorzelec" || city.name == "Olesnica"){
+            optionsVector.push_back(city.name);
+            counter++;
+        }
     }
     gui_map.setUpGUImap(c, r);
+}
+
+void GUI::setUpGUIOlesnica(const std::vector<City>& c, const std::vector<std::vector<std::vector<Track>>>& r){
+
+    olesnica_map.setUpGUImap(c, r);
+}
+
+void GUI::setUpGUIZgorzelec(const std::vector<City>& c, const std::vector<std::vector<std::vector<Track>>>& r){
+
+    zgorzelec_map.setUpGUImap(c, r);
 }
 
 int GUI::getCounter() const {
@@ -58,6 +70,8 @@ void GUI::keyboard(){
     
 }
 
+
+
 void GUI::show(std::vector<Train>& trains, Control_map& contr){
     initscr();
     cbreak();
@@ -93,20 +107,19 @@ void GUI::show(std::vector<Train>& trains, Control_map& contr){
             wattron(info_win, COLOR_PAIR(3));
             gui_map.drawTrains(info_win, trains);
             wattroff(info_win, COLOR_PAIR(3));
+        } else if(option == 1){
+            olesnica_map.drawConnections(info_win);
+            olesnica_map.drawRailsName(info_win);
+            wattron(info_win, COLOR_PAIR(3));
+            // olesnica_map.drawTrains(info_win);
+            wattroff(info_win, COLOR_PAIR(3));
+        } else if(option == 2){
+            zgorzelec_map.drawConnections(info_win);
+            zgorzelec_map.drawReverseRailsName(info_win);
+            wattron(info_win, COLOR_PAIR(3));
+            // zgorzelec_map.drawTrains(info_win);
+            wattroff(info_win, COLOR_PAIR(3));
         }
-      if(option == 8){
-                    olesnica_map.drawConnections(info_win);
-                    olesnica_map.drawRailsName(info_win);
-                    wattron(info_win, COLOR_PAIR(3));
-                    olesnica_map.drawTrains(info_win);
-                    wattroff(info_win, COLOR_PAIR(3));
-                }if(option == 9){
-                zgorzelec_map.drawConnections(info_win);
-                zgorzelec_map.drawReverseRailsName(info_win);
-                wattron(info_win, COLOR_PAIR(3));
-                zgorzelec_map.drawTrains(info_win);
-                wattroff(info_win, COLOR_PAIR(3));
-                }
       
       else{
             mvwprintw(info_win, 2, 20, optionsVector[option].c_str());

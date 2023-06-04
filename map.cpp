@@ -1,15 +1,6 @@
 #include "map.hpp"
 #include <iostream>
 
-// void World_map::start_train_on_map(int train_id, int cityA, int cityB){
-// trains_on_map.insert(std::make_pair(train_id, occupied_track(cityA,cityB,rails[cityA][cityB])));
-// trains_on_map.at(train_id).rail->start_travel();
-// }
-
-// void World_map::move_train_forvard(int train_id){
-// trains_on_map.at(train_id).rail->go_forward();
-// }
-
 void World_map::addLocation(int x, int y, const std::string name) {
     cities.push_back(City(x,y,name));
 }
@@ -20,12 +11,8 @@ void World_map::matrixes(){
     std::vector<std::vector<bool>> matrix_connections(N, std::vector<bool>(N, false));
 
 
-    // std::vector<std::vector<Rail*>> matrix_rails(N, std::vector<Rail*>(N));
-    // std::vector<std::vector<Rail*>> matrix_crossovers(N, std::vector<Rail*>(N));
     areConnections = matrix_connections;
     routes = matrix_routes;
-    // rails = matrix_rails;
-    // crossovers = matrix_crossovers;
 }
 
 void World_map::revers(int cityA, int cityB){
@@ -58,27 +45,8 @@ void World_map::create_rails()
             }
         }
     }
-    // for (const auto& pair : map_rail) {
-    //     std::cout << "Klucz: " << pair.first << ", Wartość: " << pair.second << std::endl;
-    // }
-//     for (int i = 0; i < 1; i++) {
-//         Rail* rail_array[4];
-//         for (int j = 0; j < cities.size(); j++) {
-//             std::cout<<i<<" "<<j<<":  ";
-//             if (routes[i][j].size() > 1){
-//                 std::cout<<abs(cities[i].x-routes[i][j][0].x + cities[i].y-routes[i][j][0].y);
-//                 rails[i][j] = rail_array[abs(cities[i].x-routes[i][j][0].x + cities[i].y-routes[i][j][0].y)];
-//             }
-//             std::cout<<std::endl;
-//         }
-//         for (auto &&i : rail_array)
-//         {
-            
-//         }
-        
-//         //TODO wychodzą z miast
-//     }
 }
+
 
 void World_map::connect(int cityA, int cityB, int trackInLine){
     routes[cityA][cityB] = line(cityA, cityB, trackInLine);
