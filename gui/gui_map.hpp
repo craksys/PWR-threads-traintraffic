@@ -24,6 +24,8 @@ public:
     void drawStatiscick(WINDOW *win, Control_map& contr);
     void drawNiceStatiscic(WINDOW *win, Control_map& contr);
     std::string bar(int num);
+    void drawRailsName(WINDOW *win);
+    void drawReverseRailsName(WINDOW *win);
 };
 
 #endif

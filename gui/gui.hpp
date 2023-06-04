@@ -11,6 +11,8 @@ private:
     WINDOW *menu_win;
     WINDOW *info_win;
     GUImap gui_map;
+    GUImap olesnica_map;
+    GUImap zgorzelec_map;
     std::vector<std::string> optionsVector;
     int counter = 0;
     int option = 0;
@@ -21,6 +23,11 @@ public:
     void printOptions() const;
     void show(std::vector<Train>& trains, Control_map& contr);
     void keyboard();
+
+    void setUpGUIOlesnica(const std::vector<City> &c, const std::map<int, occupied_track> &t,
+                          const std::vector<std::vector<std::vector<Track>>> &r);
+    void setUpGUIZgorzelec(const std::vector<City> &c, const std::map<int, occupied_track> &t,
+                           const std::vector<std::vector<std::vector<Track>>> &r);
 };
 
 #endif

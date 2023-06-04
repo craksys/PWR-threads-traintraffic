@@ -8,7 +8,7 @@ bool Rail::go_forward()
         next_t->is_green_light = false;
         is_green_light = true;
     }
-    
+
     return false;
 }
 

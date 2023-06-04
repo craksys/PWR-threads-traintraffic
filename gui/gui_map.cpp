@@ -17,6 +17,17 @@ void GUImap::drawCities(WINDOW *win) {
         mvwprintw(win, city.y+1, city.x,"%s","XX");
     }
 }
+void GUImap::drawRailsName(WINDOW *win) {
+    for (auto&& city : cities) {
+        mvwprintw(win, city.y, city.x - 6, city.name.c_str());
+    }
+}
+
+void GUImap::drawReverseRailsName(WINDOW *win) {
+    for (auto&& city : cities) {
+        mvwprintw(win, city.y, city.x + 2, city.name.c_str());
+    }
+}
 
 void GUImap::drawConnections(WINDOW *win) {
     for (int i = 0; i < cities.size(); i++) {

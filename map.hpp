@@ -69,6 +69,10 @@ class World_map {
     void create_rails();
     // void start_train_on_map(int train_id, int cityA, int cityB);
     // void move_train_forvard(int train_id);
+
+    void start_train_on_map(int train_id, int cityA, int cityB);
+    void move_train_forvard(int train_id);
+    void connect_without_revers(int cityA, int cityB, int trackInLine);
 };
 
 #endif

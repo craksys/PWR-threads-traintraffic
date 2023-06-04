@@ -93,7 +93,22 @@ void GUI::show(std::vector<Train>& trains, Control_map& contr){
             wattron(info_win, COLOR_PAIR(3));
             gui_map.drawTrains(info_win, trains);
             wattroff(info_win, COLOR_PAIR(3));
-        }else{
+        }
+      if(option == 8){
+                    olesnica_map.drawConnections(info_win);
+                    olesnica_map.drawRailsName(info_win);
+                    wattron(info_win, COLOR_PAIR(3));
+                    olesnica_map.drawTrains(info_win);
+                    wattroff(info_win, COLOR_PAIR(3));
+                }if(option == 9){
+                zgorzelec_map.drawConnections(info_win);
+                zgorzelec_map.drawReverseRailsName(info_win);
+                wattron(info_win, COLOR_PAIR(3));
+                zgorzelec_map.drawTrains(info_win);
+                wattroff(info_win, COLOR_PAIR(3));
+                }
+      
+      else{
             mvwprintw(info_win, 2, 20, optionsVector[option].c_str());
         }
         wrefresh(info_win);
