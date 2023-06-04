@@ -1,20 +1,42 @@
 #include "gui/gui.hpp"
 #include "map.hpp"
+#include "train.hpp"
+#include "control_map.hpp"
+#include "control_train.hpp"
+#include <cstdlib> 
+#include <ctime>
+#include <vector>
 #include <iostream>
 
 int main()
 {
     World_map map;
+    std::vector<Train> trains;
+    std::vector<std::thread> threads;
+    Control_map map_controler;
+    Control_train train_controler;
+    std::srand(std::time(0));
+
     map.addLocation(120,20,"Wroclaw");   //0
+    map_controler.addLocation(500,5,10);
     map.addLocation(115,5,"Rawicz");     //1
+    map_controler.addLocation(120,2,6);
     map.addLocation(125,7,"Trzebnica");  //2
+    map_controler.addLocation(150,1,5);
     map.addLocation(20,7,"Zagan");       //3
+    map_controler.addLocation(50,1,4);
     map.addLocation(70,20,"Legnica");    //4
+    map_controler.addLocation(400,4,8);
     map.addLocation(70,36,"Walbrzych");  //5
+    map_controler.addLocation(300,3,7);
     map.addLocation(125,40,"Klodzko");   //6
+    map_controler.addLocation(400,2,6);
     map.addLocation(150,15,"Olesnica");  //7
+    map_controler.addLocation(20,3,4);
     map.addLocation(10,30,"Zgorzelec");  //8
+    map_controler.addLocation(30,2,4);
     map.addLocation(70,5,"Glogow");      //9
+    map_controler.addLocation(0,1,5);
     map.matrixes();
     
     map.connect(4, 0, 1);
@@ -29,9 +51,30 @@ int main()
     map.connect(8, 5, 35);
     map.connect(6, 0, 4);
     map.create_rails();
-    // GUI gui;
-    // gui.setUpGUI(map.getCities(), map.getTrainsOnMap(), map.getRoutes());
-    // gui.show();
+
+    map_controler.setUpConnections(map.getAreConnections());
+    
+    train_controler.test(trains, map, map_controler);
+    train_controler.test(trains, map, map_controler);
+
+    std::cout<<map.getAreConnections().size()<<std::endl;
+    // std::cout<<map.getMaper().size()<<std::endl;
+    // std::cout<<map.used_mutex<<std::endl;
+
+    GUI gui;
+    gui.setUpGUI(map.getCities(), map.getRoutes());
+    
+    threads.emplace_back(&Control_map::next_hour, std::ref(map_controler));
+    threads.emplace_back(&GUI::show, std::ref(gui), std::ref(trains), std::ref(map_controler));
+    for (auto& train : trains) {
+        threads.emplace_back(&Train::run, &train);
+    }
+
+    gui.keyboard();
+
+    for (auto& thread : threads) {
+        thread.join();
+    }
 
     return 0;
 }
