@@ -78,7 +78,7 @@ void Train::run(){
             switch (to)
             {
             case 7:
-                /* code */
+
                 break;
             
             case 8:

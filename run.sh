@@ -1,1 +1,1 @@
-g++ -o program rails.cpp map.cpp gui/gui.cpp gui/gui_map.cpp main.cpp -lncurses && ./program
+g++ -o program control_train.cpp control_map.cpp train.cpp map.cpp gui/gui.cpp gui/gui_map.cpp main.cpp -lncurses && ./program

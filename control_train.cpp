@@ -1,13 +1,13 @@
 #include "control_train.hpp"
 
-void Control_train::test(std::vector<Train> &trains, World_map &map, Control_map& contr)
+void Control_train::test(std::vector<Train> &trains, World_map &map, Control_map& contr, World_map &zgorzelec, World_map &olesnica)
 {
     auto cities = map.getCities();
     auto routes = map.getRoutes();
     for (int i = 0; i < cities.size(); i++) {
         for (int j = 0; j < cities.size(); j++) {
                 if(routes[i][j].size()>0){
-                Train train = Train(i,5,map, contr);
+                Train train = Train(i,5,map, contr, zgorzelec, olesnica);
                 // train.set_up_route(i,j);
                 train.start(i);
                 

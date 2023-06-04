@@ -75,8 +75,8 @@ int main()
 
     map_controler.setUpConnections(map.getAreConnections());
     
-    train_controler.test(trains, map, map_controler);
-    train_controler.test(trains, map, map_controler);
+    train_controler.test(trains, map, map_controler,zgorzelec, olesnica);
+    train_controler.test(trains, map, map_controler, zgorzelec, olesnica);
 
     std::cout<<map.getAreConnections().size()<<std::endl;
 

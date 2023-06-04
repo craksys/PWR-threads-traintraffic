@@ -17,10 +17,12 @@ class Train{
     int to;
     Control_map& controler;
     World_map& map;
+    World_map& zgorzelec;
+    World_map& olesnica;
 
     public:
-    Train(int id, int speed, World_map& worldMap, Control_map& contr)
-    : train_id(id), speed(speed), distance_map(-1), from(-1), to(-1), map(worldMap), controler(contr) {}
+    Train(int id, int speed, World_map& worldMap, Control_map& contr, World_map& zgorzelec, World_map& olesnica)
+    : train_id(id), speed(speed), distance_map(-1), from(-1), to(-1), map(worldMap), zgorzelec(zgorzelec), olesnica(olesnica), controler(contr) {}
     void run();
     void start(int f);
     void set_up_route(int f, int t);
