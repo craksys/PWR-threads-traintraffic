@@ -20,13 +20,41 @@ void Train::ride_on_map(int x, int y)
     map.unlock_mutex(x, y);
 }
 
-void Train::get_off_map(int x, int y)
+void Train::get_off_map( int x, int y)
 {
     map.unlock_mutex(x, y);
     distance_map = -1;
     draw_on_map = false;
     is_on_map = false;
 }
+
+void Train::get_on_track(World_map& city_map, int x, int y)
+{
+    city_map.lock_mutex(x, y);
+    draw_in_city = true;
+    distance_tr = 0;
+}
+
+void Train::ride_on_track(World_map& city_map, int x, int y)
+{
+    x = city_map.getRoutes()[from_tr][to_tr][distance_tr+1].x;
+    y = city_map.getRoutes()[from_tr][to_tr][distance_tr+1].y;
+    city_map.lock_mutex(x, y);
+    distance_tr++;
+
+    x = city_map.getRoutes()[from_tr][to_tr][distance_tr-1].x;
+    y = city_map.getRoutes()[from_tr][to_tr][distance_tr-1].y;
+    city_map.unlock_mutex(x, y);
+}
+
+
+void Train::get_off_track(World_map& city_map, int x, int y)
+{
+    city_map.unlock_mutex(x, y);
+    distance_tr = -1;
+    draw_in_city = false;
+}
+
 
 void Train::set_is_on_map(bool is)
 {
@@ -49,6 +77,44 @@ int Train::distance()
     return distance_map;
 }
 
+int Train::form_track()
+{
+    return from_tr;
+}
+
+int Train::to_track()
+{
+    return to_tr;
+}
+
+int Train::distance_track()
+{
+    return distance_tr;
+}
+
+void Train::run_in_city(World_map& city_map){
+    int xt = 0;
+    int yt = 0;
+    from_tr = 0;
+    to_tr = 1;
+    while(true){ //cos innego
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            if(distance_tr==-1){
+                xt = city_map.getRoutes()[from_tr][to_tr][0].x;
+                yt = city_map.getRoutes()[from_tr][to_tr][0].y;
+                get_on_track(city_map, xt, yt);
+            }else if(city_map.getRoutes()[from_tr][to_tr].size()<distance_tr+2){
+                // xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
+                // yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
+                // get_off_track(city_map, xt, yt);
+            }else{
+                xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
+                yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
+                ride_on_track(city_map, xt, yt);
+            }
+    }
+}
+
 void Train::run(){
     int x = 0;
     int y = 0;
@@ -61,7 +127,7 @@ void Train::run(){
             if(distance_map==-1){
                 x = map.getRoutes()[from][to][0].x;
                 y = map.getRoutes()[from][to][0].y;
-                get_on_map(x, y);
+                    get_on_map(x, y);
             }else if(map.getRoutes()[from][to].size()<distance_map+2){
                 x = map.getRoutes()[from][to][distance_map].x;
                 y = map.getRoutes()[from][to][distance_map].y;
@@ -71,14 +137,14 @@ void Train::run(){
             }else{
                 x = map.getRoutes()[from][to][distance_map].x;
                 y = map.getRoutes()[from][to][distance_map].y;
-                ride_on_map(x, y);
+                    ride_on_map(x, y);
             }
 
         }else{
             switch (to)
             {
             case 7:
-
+                run_in_city(olesnica);
                 break;
             
             case 8:

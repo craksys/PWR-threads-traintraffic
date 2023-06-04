@@ -111,13 +111,13 @@ void GUI::show(std::vector<Train>& trains, Control_map& contr){
             olesnica_map.drawConnections(info_win);
             olesnica_map.drawRailsName(info_win);
             wattron(info_win, COLOR_PAIR(3));
-            // olesnica_map.drawTrains(info_win);
+            olesnica_map.drawTrainsOnStation(info_win, trains);
             wattroff(info_win, COLOR_PAIR(3));
         } else if(option == 2){
             zgorzelec_map.drawConnections(info_win);
             zgorzelec_map.drawReverseRailsName(info_win);
             wattron(info_win, COLOR_PAIR(3));
-            // zgorzelec_map.drawTrains(info_win);
+            zgorzelec_map.drawTrainsOnStation(info_win, trains);
             wattroff(info_win, COLOR_PAIR(3));
         }
       

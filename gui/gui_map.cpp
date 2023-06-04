@@ -54,6 +54,20 @@ void GUImap::drawTrains(WINDOW *win, std::vector<Train>& trains){
     
 }
 
+void GUImap::drawTrainsOnStation(WINDOW *win, std::vector<Train>& trains){
+    for (auto &&train : trains)
+    {
+        if(train.get_draw_in_city()){
+            mvwprintw(win, 
+            routes[train.form_track()][train.to_track()][train.distance_track()].y,
+            routes[train.form_track()][train.to_track()][train.distance_track()].x, 
+            "%c",
+            routes[train.form_track()][train.to_track()][train.distance_track()].typeOfTrack);
+        }
+    }
+    
+}
+
 void GUImap::drawStatiscick(WINDOW *win, Control_map &contr)
 {
     int x = 165;
