@@ -50,6 +50,13 @@ class Train{
     int form_track();
     int to_track();
     int distance_track();
+    int getFromOlesnicaIn(int from, int to);
+
+    int getFromOlesnicaIn(int from, int to, World_map &city_map);
+
+    int getFromOlesnicaIn(int to, World_map &city_map);
+
+    int getToOlesnicaIn(int to, World_map &city_map);
 };
 
 #endif

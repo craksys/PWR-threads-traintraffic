@@ -7,6 +7,7 @@
 
 
 class control_station {
+    bool counter[100];
 
 };
 

@@ -104,15 +104,88 @@ void Train::run_in_city(World_map& city_map){
                 yt = city_map.getRoutes()[from_tr][to_tr][0].y;
                 get_on_track(city_map, xt, yt);
             }else if(city_map.getRoutes()[from_tr][to_tr].size()<distance_tr+2){
-                // xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
-                // yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
-                // get_off_track(city_map, xt, yt);
+                 xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
+                 yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
+                //ride_on_track(city_map, xt, yt);
+                from_tr = getFromOlesnicaIn(to_tr, city_map);
+                to_tr = getToOlesnicaIn(to_tr,city_map);
+                get_off_track(city_map, xt, yt);
             }else{
                 xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
                 yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
                 ride_on_track(city_map, xt, yt);
             }
     }
+}
+int Train::getFromOlesnicaIn(int to, World_map& city_map){
+    switch(to){
+        case 1:
+            if (city_map.counter[0]){
+                return 4;
+            }else{
+                return 6;
+            }
+            break;
+        case 5:
+            return 26;
+            break;
+        case 27:
+            if (city_map.counter[1]){
+                return 32;
+            }else{
+                return 34;
+            }
+            break;
+        case 7:
+            if (city_map.counter[2]){
+                return 30;
+            }else{
+                return 28;
+            }
+        default:
+            return 0;
+            break;
+    }
+
+}
+
+int Train::getToOlesnicaIn(int to, World_map& city_map){
+    switch(to){
+        case 1:
+            if (city_map.counter[0]){
+                city_map.counter[0] = false;
+                return 5;
+            }else{
+                city_map.counter[0] = true;
+                return 7;
+            }
+            break;
+        case 5:
+            return 27;
+            break;
+        case 27:
+            if (city_map.counter[1]){
+                city_map.counter[1] = false;
+                return 33;
+            }else{
+                city_map.counter[1] = true;
+                return 35;
+            }
+            break;
+        case 7:
+            if (city_map.counter[2]){
+                city_map.counter[2] = false;
+                return 31;
+            }else{
+                city_map.counter[2] = true;
+                return 29;
+            }
+        default:
+            return 1;
+            break;
+    }
+
+
 }
 
 void Train::run(){

@@ -48,7 +48,7 @@ class World_map {
     const std::vector<std::vector<bool>> getAreConnections() const {return areConnections;}
     
     std::vector<Track> line(int cityA, int cityB, int trackInLine);
-
+    bool counter[8];
     void lock_mutex(int x,int y);
     void unlock_mutex(int x,int y);
 
