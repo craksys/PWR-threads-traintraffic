@@ -13,7 +13,7 @@ Podczas pisania tego kodu byliśmy obecni we trójke Ja, Kami i Bóg.
 Kiedyś wszyscy wiedzieliśmy jak on działa.
 Teraz tylko Bóg wie co sie dzieje w tym kodzie :)
 
-Counter godzin spędzonych na czytaniu kodu: 14
+Counter godzin spędzonych na czytaniu kodu: 15
 Prosze zwiększać jak podjeło sie próbe.
 */
 
@@ -52,9 +52,9 @@ int main()
     map.addLocation(125,40,"Klodzko");   //6
     map_controler.addLocation(400,2,6);
     map.addLocation(150,15,"Olesnica");  //7
-    map_controler.addLocation(20,3,4);
+    map_controler.addLocation(20,4,4);
     map.addLocation(10,30,"Zgorzelec");  //8
-    map_controler.addLocation(30,2,4);
+    map_controler.addLocation(30,5,4);
     map.addLocation(70,5,"Glogow");      //9
     map_controler.addLocation(0,1,5);
     map.matrixes();

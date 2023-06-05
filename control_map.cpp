@@ -21,7 +21,7 @@ void Control_map::next_hour()
 {
     while (true)
     {
-        std::this_thread::sleep_for(std::chrono::seconds(20));
+        std::this_thread::sleep_for(std::chrono::seconds(40));
         for (auto &&city : cities_data)
         {
             city.pasangers += 150 * (std::rand()%city.city_size);

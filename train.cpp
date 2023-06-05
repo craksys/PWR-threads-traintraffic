@@ -105,7 +105,7 @@ void Train::run_in_city(World_map& city_map){
     from_tr = 0;
     to_tr = 1;
     while(true){ //cos innego
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+            std::this_thread::sleep_for(std::chrono::milliseconds(50));
             if(distance_tr==-1){
                 xt = city_map.getRoutes()[from_tr][to_tr][0].x;
                 yt = city_map.getRoutes()[from_tr][to_tr][0].y;
@@ -153,6 +153,8 @@ int Train::getFromZgorzelec(int to, World_map& city_map){
         case 7:
             return 32;//koniec pierwszego toru
         case 5:
+            return 8;
+        case 9:
             if (city_map.counter[1]){
                 return 10;
             }else{
@@ -202,7 +204,11 @@ int Train::getFromZgorzelec(int to, World_map& city_map){
         case 3:
             return -1;
         default:
-            city_map.intcounter = rand() % 4;
+            if (city_map.intcounter > 3){
+                city_map.intcounter = 0;
+            }else{
+                city_map.intcounter++;
+            }
             switch(city_map.intcounter){
                 case 0:
                     return 48;
@@ -211,7 +217,7 @@ int Train::getFromZgorzelec(int to, World_map& city_map){
                     return 50;
                     break;
                 case 2:
-                    return 24;
+                    return 44;
                     break;
                 case 3:
                     return 38;
@@ -236,7 +242,7 @@ int Train::getToZgorzelec(int to, World_map& city_map){
             }
         case 7:
             return 33;//koniec pierwszego toru
-        case 5:
+        case 9:
             if (city_map.counter[1]){
                 city_map.counter[1] = false;
                 return 11;
@@ -244,6 +250,8 @@ int Train::getToZgorzelec(int to, World_map& city_map){
                 city_map.counter[1] = true;
                 return 15;
             }
+        case 5:
+            return 9;
         case 15:
             return 31;
         case 11:
@@ -298,7 +306,7 @@ int Train::getToZgorzelec(int to, World_map& city_map){
                     return 51;
                     break;
                 case 2:
-                    return 25;
+                    return 45;
                     break;
                 case 3:
                     return 39;
@@ -473,7 +481,7 @@ void Train::run(){
     int x = 0;
     int y = 0;
     while (true) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(speed*50));
+        std::this_thread::sleep_for(std::chrono::milliseconds(speed*100));
         if(is_on_map){
 
 
