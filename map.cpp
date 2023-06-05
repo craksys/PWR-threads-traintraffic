@@ -60,6 +60,10 @@ void World_map::connect_without_revers(int cityA, int cityB, int trackInLine){
     routes[cityA][cityB] = line(cityA, cityB, trackInLine);
 }
 
+void World_map::connect_reversed(int cityA, int cityB, int trackInLine){
+    routes[cityA][cityB] = lineReverse(cityA, cityB, trackInLine);
+}
+
 std::vector<Track> World_map::line(int cityA, int cityB, int trackInLine){
     std::vector<Track> points;
     char diagonaChar;
@@ -130,7 +134,76 @@ std::vector<Track> World_map::line(int cityA, int cityB, int trackInLine){
     }
     return points;
 }
+std::vector<Track> World_map::lineReverse(int cityA, int cityB, int trackInLine){
+    std::vector<Track> points;
+    char diagonaChar;
+    int slope;
+    int step = 1;
+    int x = cities[cityA].x+1;
+    int y = cities[cityA].y+1;
+    if(cities[cityB].x-cities[cityA].x < cities[cityA].y-cities[cityB].y){
+        y--;
+        int By = cities[cityB].y+2;
+        for(int i=0;i<trackInLine;i++){{
+                y -= step;
+                points.insert(points.begin(),Track(x,y,'|'));
+                //points.push_back(Track(x,y,'|'));
+            }
+        }
 
+        if(cities[cityA].x < cities[cityB].x){
+            while (x < cities[cityB].x+1){
+                y += -1;
+                points.insert(points.begin(),Track(x,y,'/'));
+                x += 1;
+            }
+            y += -1;
+            points.insert(points.begin(),Track(x,y,'/'));
+        }
+        else{
+            y += -1;
+            points.insert(points.begin(),Track(x,y,'\\'));
+            while (x > cities[cityB].x+1){
+                x += -1;
+                y += -1;
+                points.insert(points.begin(),Track(x,y,'\\'));
+            }
+        }
+
+        while(y > By){
+            y -= step;
+            points.insert(points.begin(),Track(x,y,'|'));
+        }
+    }else{
+        int By = cities[cityB].y+1;
+        for(int i=0;i<trackInLine;i++){{
+                x += step;
+                points.insert(points.begin(),Track(x,y,'_'));
+            }
+        }
+
+        if(cities[cityA].y < By){
+            while (y < By){
+                x += 1;
+                y += 1;
+                points.insert(points.begin(),Track(x,y,'\\'));
+            }
+        }
+        else{
+            while (y > By){
+                x += 1;
+                points.insert(points.begin(),Track(x,y,'/'));
+                y += -1;
+            }
+        }
+
+        while(x<cities[cityB].x-1){
+            x += step;
+            points.insert(points.begin(),Track(x,y,'_'));
+        }
+    }
+    return points;
+}
 void World_map::lock_mutex(int x, int y)
 {
     mutex_rails[map_rail[x*1000+y]].lock();

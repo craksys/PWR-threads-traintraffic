@@ -21,7 +21,7 @@ public:
     void drawCities(WINDOW *win);
     void drawConnections(WINDOW *win);
     void drawTrains(WINDOW *win, std::vector<Train>& trains);
-    void drawTrainsOnStation(WINDOW *win, std::vector<Train>& trains);
+    void drawTrainsOnStation(WINDOW *win, std::vector<Train>& trains, int c);
     void drawStatiscick(WINDOW *win, Control_map& contr);
     void drawNiceStatiscic(WINDOW *win, Control_map& contr);
     std::string bar(int num);

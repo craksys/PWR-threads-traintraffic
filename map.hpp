@@ -49,6 +49,7 @@ class World_map {
     
     std::vector<Track> line(int cityA, int cityB, int trackInLine);
     bool counter[8];
+    int intcounter;
     void lock_mutex(int x,int y);
     void unlock_mutex(int x,int y);
 
@@ -59,6 +60,10 @@ class World_map {
     void create_rails();
 
     void connect_without_revers(int cityA, int cityB, int trackInLine);
+
+    std::vector<Track> lineReverse(int cityA, int cityB, int trackInLine);
+
+    void connect_reversed(int cityA, int cityB, int trackInLine);
 };
 
 #endif

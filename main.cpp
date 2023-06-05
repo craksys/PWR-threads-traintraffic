@@ -13,7 +13,7 @@ Podczas pisania tego kodu byliśmy obecni we trójke Ja, Kami i Bóg.
 Kiedyś wszyscy wiedzieliśmy jak on działa.
 Teraz tylko Bóg wie co sie dzieje w tym kodzie :)
 
-Counter godzin spędzonych na czytaniu kodu: 10
+Counter godzin spędzonych na czytaniu kodu: 14
 Prosze zwiększać jak podjeło sie próbe.
 */
 
@@ -160,18 +160,18 @@ void createOlesnica(World_map &olesnica) {
 
     olesnica.matrixes();
     olesnica.connect_without_revers(0, 1, 3);
-    olesnica.connect_without_revers(2, 3, 3);
+    olesnica.connect_reversed(2, 3, 3);
     olesnica.connect_without_revers(4, 5, 3);
     olesnica.connect_without_revers(6, 7, 3);
-    olesnica.connect_without_revers(8, 9, 3);
-    olesnica.connect_without_revers(10, 11, 3);
-    olesnica.connect_without_revers(12, 13, 3);
-    olesnica.connect_without_revers(14, 15, 3);
-    olesnica.connect_without_revers(16, 17, 3);
-    olesnica.connect_without_revers(18, 19, 3);
-    olesnica.connect_without_revers(20, 21, 3);
-    olesnica.connect_without_revers(22, 23, 3);
-    olesnica.connect_without_revers(24, 25, 3);
+    olesnica.connect_reversed(8, 9, 3);
+    olesnica.connect_reversed(10, 11, 3);
+    olesnica.connect_reversed(12, 13, 3);
+    olesnica.connect_reversed(14, 15, 3);
+    olesnica.connect_reversed(16, 17, 3);
+    olesnica.connect_reversed(18, 19, 3);
+    olesnica.connect_reversed(20, 21, 3);
+    olesnica.connect_reversed(22, 23, 3);
+    olesnica.connect_reversed(24, 25, 3);
     olesnica.connect_without_revers(26, 27, 3);
     olesnica.connect_without_revers(28, 29, 3);
     olesnica.connect_without_revers(30, 31, 3);

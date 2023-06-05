@@ -1,5 +1,10 @@
 #include "train.hpp"
 #include <iostream>
+#include <iostream>
+#include <cstdlib>  // for rand() and srand()
+#include <ctime>    // for time()
+
+
 
 void Train::get_on_map(int x, int y)
 {
@@ -93,6 +98,8 @@ int Train::distance_track()
 }
 
 void Train::run_in_city(World_map& city_map){
+    srand(time(0));
+    int breaker = 0;
     int xt = 0;
     int yt = 0;
     from_tr = 0;
@@ -104,12 +111,29 @@ void Train::run_in_city(World_map& city_map){
                 yt = city_map.getRoutes()[from_tr][to_tr][0].y;
                 get_on_track(city_map, xt, yt);
             }else if(city_map.getRoutes()[from_tr][to_tr].size()<distance_tr+2){
-                 xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
-                 yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
-                //ride_on_track(city_map, xt, yt);
-                from_tr = getFromOlesnicaIn(to_tr, city_map);
-                to_tr = getToOlesnicaIn(to_tr,city_map);
-                get_off_track(city_map, xt, yt);
+                if(to == 7) {
+                    xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
+                    yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
+                    breaker = getFromOlesnica(to_tr, city_map);
+                    if (breaker == -1) {
+                        get_off_track(city_map, xt, yt);
+                        break;
+                    }
+                    from_tr = breaker;
+                    to_tr = getToOlesnica(to_tr, city_map);
+                    get_off_track(city_map, xt, yt);
+                }else if (to == 8){
+                    xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
+                    yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
+                    breaker = getFromOlesnica(to_tr, city_map);
+                    if (breaker == -1) {
+                        get_off_track(city_map, xt, yt);
+                        break;
+                    }
+                    from_tr = breaker;
+                    to_tr = getToOlesnica(to_tr, city_map);
+                    get_off_track(city_map, xt, yt);
+                }
             }else{
                 xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
                 yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
@@ -117,7 +141,23 @@ void Train::run_in_city(World_map& city_map){
             }
     }
 }
-int Train::getFromOlesnicaIn(int to, World_map& city_map){
+
+int Train::getFromZgorzelec(int to, World_map& city_map){
+    switch(to){
+        case 1:
+            if (city_map.counter[0]){
+                return 4;
+            }else{
+                return 6;
+            }
+    }
+}
+
+int Train::getToZgorzelec(int to, World_map& city_map){
+
+}
+
+int Train::getFromOlesnica(int to, World_map& city_map){
     switch(to){
         case 1:
             if (city_map.counter[0]){
@@ -142,14 +182,59 @@ int Train::getFromOlesnicaIn(int to, World_map& city_map){
             }else{
                 return 28;
             }
+            break;
+        case 13:
+            return 10;
+            break;
+        case 11:
+            return 2;
+            break;
+        case 21:
+            return 14;
+        case 19:
+            return 14;
+        case 15:
+            return 10;
+        case 25:
+            return 16;
+        case 23:
+            return 16;
+        case 17:
+            return 8;
+        case 9:
+            return 2;
+        case 3:
+            return -1;
         default:
+            city_map.intcounter = rand() % 5;
+            switch(city_map.intcounter){
+                case 0:
+                    return 12;
+                    break;
+                case 1:
+                    return 20;
+                    break;
+                case 2:
+                    return 18;
+                    break;
+                case 3:
+                    return 24;
+                    break;
+                case 4:
+                    return 22;
+                    break;
+                default:
+                    return 12;
+                    break;
+            }
+
             return 0;
             break;
     }
 
 }
 
-int Train::getToOlesnicaIn(int to, World_map& city_map){
+int Train::getToOlesnica(int to, World_map& city_map){
     switch(to){
         case 1:
             if (city_map.counter[0]){
@@ -180,7 +265,49 @@ int Train::getToOlesnicaIn(int to, World_map& city_map){
                 city_map.counter[2] = true;
                 return 29;
             }
+        case 13:
+            return 11;
+            break;
+        case 11:
+            return 3;
+            break;
+        case 21:
+            return 15;
+        case 19:
+            return 15;
+        case 15:
+            return 11;
+        case 25:
+            return 17;
+        case 23:
+            return 17;
+        case 17:
+            return 9;
+        case 9:
+            return 3;
+
+
         default:
+            switch(city_map.intcounter){
+                case 0:
+                    return 13;
+                    break;
+                case 1:
+                    return 21;
+                    break;
+                case 2:
+                    return 19;
+                    break;
+                case 3:
+                    return 25;
+                    break;
+                case 4:
+                    return 23;
+                    break;
+                default:
+                    return 13;
+                    break;
+            }
             return 1;
             break;
     }
@@ -194,8 +321,8 @@ void Train::run(){
     while (true) {
         std::this_thread::sleep_for(std::chrono::milliseconds(speed*50));
         if(is_on_map){
-            
-            
+
+
             // std::cout<<distance_map<<std::endl;
             if(distance_map==-1){
                 x = map.getRoutes()[from][to][0].x;
@@ -219,16 +346,16 @@ void Train::run(){
             case 7:
                 run_in_city(olesnica);
                 break;
-            
+
             case 8:
                 /* code */
                 break;
-            
+
             default:
                 std::this_thread::sleep_for(std::chrono::seconds(5));
                 break;
             }
-            
+
             // std::cout<<from<<"->"<<to<<std::endl;
             controler.take_passangers(train_cap, to);
             from = to;

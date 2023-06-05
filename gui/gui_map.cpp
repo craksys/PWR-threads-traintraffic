@@ -54,10 +54,10 @@ void GUImap::drawTrains(WINDOW *win, std::vector<Train>& trains){
     
 }
 
-void GUImap::drawTrainsOnStation(WINDOW *win, std::vector<Train>& trains){
+void GUImap::drawTrainsOnStation(WINDOW *win, std::vector<Train>& trains, int c){
     for (auto &&train : trains)
     {
-        if(train.get_draw_in_city()){
+        if(train.get_draw_in_city(c)){
             mvwprintw(win, 
             routes[train.form_track()][train.to_track()][train.distance_track()].y,
             routes[train.form_track()][train.to_track()][train.distance_track()].x, 

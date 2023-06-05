@@ -41,7 +41,7 @@ class Train{
     void get_off_track(World_map& city_map, int x, int y);
 
     bool get_draw_on_map() {return draw_on_map;};
-    bool get_draw_in_city() {return draw_in_city;};
+    bool get_draw_in_city(int c) {return draw_in_city && c==to;};
     bool get_is_on_map() {return is_on_map;};
     void set_is_on_map(bool is);
     int form_city();
@@ -50,13 +50,14 @@ class Train{
     int form_track();
     int to_track();
     int distance_track();
-    int getFromOlesnicaIn(int from, int to);
 
-    int getFromOlesnicaIn(int from, int to, World_map &city_map);
+    int getFromOlesnica(int to, World_map &city_map);
 
-    int getFromOlesnicaIn(int to, World_map &city_map);
+    int getToOlesnica(int to, World_map &city_map);
 
-    int getToOlesnicaIn(int to, World_map &city_map);
+    int getFromZgorzelec(int to, World_map &city_map);
+
+    int getToZgorzelec(int to, World_map &city_map);
 };
 
 #endif
