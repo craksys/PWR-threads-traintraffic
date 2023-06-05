@@ -125,13 +125,13 @@ void Train::run_in_city(World_map& city_map){
                 }else if (to == 8){
                     xt = city_map.getRoutes()[from_tr][to_tr][distance_tr].x;
                     yt = city_map.getRoutes()[from_tr][to_tr][distance_tr].y;
-                    breaker = getFromOlesnica(to_tr, city_map);
+                    breaker = getFromZgorzelec(to_tr, city_map);
                     if (breaker == -1) {
                         get_off_track(city_map, xt, yt);
                         break;
                     }
                     from_tr = breaker;
-                    to_tr = getToOlesnica(to_tr, city_map);
+                    to_tr = getToZgorzelec(to_tr, city_map);
                     get_off_track(city_map, xt, yt);
                 }
             }else{
@@ -150,11 +150,165 @@ int Train::getFromZgorzelec(int to, World_map& city_map){
             }else{
                 return 6;
             }
+        case 7:
+            return 32;//koniec pierwszego toru
+        case 5:
+            if (city_map.counter[1]){
+                return 10;
+            }else{
+                return 14;
+            }
+        case 15:
+            return 30;
+        case 11:
+            return 12;
+        case 13:
+            if (city_map.counter[2]){
+                return 16;
+            }else{
+                return 20;
+            }
+        case 21:
+            return 28;
+        case 17:
+            return 18;
+        case 19:
+            if (city_map.counter[3]){
+                return 22;
+            }else{
+                return 26;
+            }
+        case 23:
+            return 24;
+            //tutaj powrot sie zaczyna
+        case 49:
+            return 46;
+        case 47:
+            return 42;
+        case 41:
+            return 36;
+        case 37:
+            return 34;
+        case 35:
+            return 2;
+        case 51:
+            return 42;
+        case 45:
+            return 36;
+        case 39:
+            return 2;
+        case 43:
+            return 40;
+        case 3:
+            return -1;
+        default:
+            city_map.intcounter = rand() % 4;
+            switch(city_map.intcounter){
+                case 0:
+                    return 48;
+                    break;
+                case 1:
+                    return 50;
+                    break;
+                case 2:
+                    return 24;
+                    break;
+                case 3:
+                    return 38;
+                    break;
+                default:
+                    return 0;
+                    break;
+            }
+
     }
 }
 
 int Train::getToZgorzelec(int to, World_map& city_map){
+    switch(to){
+        case 1:
+            if (city_map.counter[0]){
+                city_map.counter[0] = false;
+                return 5;
+            }else{
+                city_map.counter[0] = true;
+                return 7;
+            }
+        case 7:
+            return 33;//koniec pierwszego toru
+        case 5:
+            if (city_map.counter[1]){
+                city_map.counter[1] = false;
+                return 11;
+            }else{
+                city_map.counter[1] = true;
+                return 15;
+            }
+        case 15:
+            return 31;
+        case 11:
+            return 13;
+        case 13:
+            if (city_map.counter[2]){
+                city_map.counter[2] = false;
+                return 17;
+            }else{
+                city_map.counter[2] = true;
+                return 21;
+            }
+        case 21:
+            return 29;
+        case 17:
+            return 19;
+        case 19:
+            if (city_map.counter[3]){
+                city_map.counter[3] = false;
+                return 23;
+            }else{
+                city_map.counter[3] = true;
+                return 27;
+            }
+        case 23:
+            return 25;
+        case 49:
+            return 47;
+        case 47:
+            return 43;
+        case 41:
+            return 37;
+        case 37:
+            return 35;
+        case 35:
+            return 3;
+        case 51:
+            return 43;
+        case 45:
+            return 37;
+        case 39:
+            return 3;
+        case 43:
+            return 41;
 
+        default:
+            switch(city_map.intcounter){
+                case 0:
+                    return 49;
+                    break;
+                case 1:
+                    return 51;
+                    break;
+                case 2:
+                    return 25;
+                    break;
+                case 3:
+                    return 39;
+                    break;
+                default:
+                    return 1;
+                    break;
+            }
+
+    }
 }
 
 int Train::getFromOlesnica(int to, World_map& city_map){
@@ -348,7 +502,7 @@ void Train::run(){
                 break;
 
             case 8:
-                /* code */
+                run_in_city(zgorzelec);
                 break;
 
             default:
