@@ -13,9 +13,9 @@ Installation guide (Ubuntu 23.04):
 
 `sudo apt install git g++ libncurses-dev`
 
-`git clone `
+`git clone https://github.com/craksys/PWR-threads-traintraffic`
 
-`cd `
+`cd PWR-threads-traintraffic`
 
 Build and run:
 
